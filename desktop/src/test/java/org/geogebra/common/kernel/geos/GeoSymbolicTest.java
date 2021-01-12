@@ -1313,6 +1313,16 @@ public class GeoSymbolicTest extends BaseSymbolicTest {
 	}
 
 	@Test
+	public void testGiacRounding() {
+		app.setRounding("20");
+		GeoSymbolic number = add("11.3*1.5");
+		AlgebraItem.toggleSymbolic(number);
+		String output = AlgebraItem.getOutputTextForGeoElement(number);
+		assertThat(output, equalTo("16.95"));
+		resetRounding();
+	}
+
+	@Test
 	public void testInnerNestedCommands() {
 		add("f(x)=x^2");
 		add("a(x)=Solve(Derivative(f))");
