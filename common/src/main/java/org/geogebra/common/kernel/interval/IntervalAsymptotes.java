@@ -27,8 +27,11 @@ public class IntervalAsymptotes {
 	 */
 	public void process() {
 		for (int index = 1; index < samples.count() -1; index++) {
-			if (value(index).isWhole()) {
+			Interval value = value(index);
+			if (value.isWhole()) {
 				checkAsymptote(index);
+			} else if (value.isUndefined()) {
+				fixGraph(index);
 			}
 		}
 	}
