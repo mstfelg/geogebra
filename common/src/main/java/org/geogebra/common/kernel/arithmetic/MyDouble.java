@@ -253,7 +253,7 @@ public class MyDouble extends ValidExpression
 			return;
 		}
 
-		c.set(a.val * bval);
+		c.set(DoubleUtil.checkDecimalFraction(a.val * bval));
 	}
 
 	/**
