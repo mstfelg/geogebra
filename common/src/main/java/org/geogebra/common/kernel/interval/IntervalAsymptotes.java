@@ -1,5 +1,7 @@
 package org.geogebra.common.kernel.interval;
 
+import org.geogebra.common.kernel.arithmetic.MyDouble;
+
 /**
  * Class to detect and fix asymptotes and cut off points
  *
@@ -24,35 +26,18 @@ public class IntervalAsymptotes {
 	 * Check samples for cut-off points and fix them.
 	 */
 	public void process() {
-		for (int index = 0; index < samples.count(); index++) {
-			if (value(index).isUndefined()) {
-				try {
-					fixVerticalAsymptote(index);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			} else if (value(index).isWhole()) {
-				value(index).setEmpty();
+		for (int index = 1; index < samples.count() -1; index++) {
+			if (value(index).isWhole()) {
+				checkAsymptote(index);
 			}
 		}
 	}
 
-	private void fixVerticalAsymptote(int index) throws Exception {
-		Interval result = new Interval(0);
-		LinearSpace space = new LinearSpace();
-		Interval x1 = samples.get(index).x();
-		Interval refine = new Interval(x1.getLow() - 1E-7, x1.getHigh() + 1E-7);
-		space.update(refine, 100);
-		for (int i = 0; i < space.values.size() - 1; i += 1) {
-			Interval x = new Interval(space.values.get(i), space.values.get(i + 1));
-			Interval y = function.evaluate(x);
-			if (!y.isUndefined() && (y.getLength() > result.getLength())) {
-				result.set(y);
-			}
-		}
-		if (!result.isEmpty()) {
-			samples.get(index).y().set(result);
-			samples.get(index).y().set(result);
+	private void checkAsymptote(int index) {
+		Interval leftValue = leftValue(index);
+		Interval rightValue = rightValue(index);
+		if (MyDouble.isFinite(leftValue.getHigh()) || MyDouble.isFinite(rightValue.getLow())) {
+			samples.get(index).markAsAsymptote();
 		}
 	}
 

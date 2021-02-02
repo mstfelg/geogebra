@@ -11,6 +11,7 @@ public class IntervalTuple {
 	private final Interval x;
 	private final Interval y;
 	private int index = -1;
+	private boolean asymptote = false;
 
 	/**
 	 *
@@ -107,5 +108,17 @@ public class IntervalTuple {
 
 	public int index() {
 		return index;
+	}
+
+	public boolean isUndefined() {
+		return y.isUndefined();
+	}
+
+	public boolean isAsymptote() {
+		return asymptote;
+	}
+
+	public void markAsAsymptote() {
+		asymptote = true;
 	}
 }

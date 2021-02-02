@@ -130,6 +130,11 @@ class IntervalTrigonometric {
 			return interval;
 		}
 
+		if (interval.isWhole()) {
+			interval.setUndefined();
+			return interval;
+		}
+
 		Interval cache = new Interval(interval);
 		handleNegative(cache);
 		cache.fmod(IntervalConstants.pi());

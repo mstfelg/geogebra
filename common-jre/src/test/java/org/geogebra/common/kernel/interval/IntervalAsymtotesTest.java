@@ -1,5 +1,6 @@
 package org.geogebra.common.kernel.interval;
 
+import static java.lang.Math.PI;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -16,33 +17,26 @@ public class IntervalAsymtotesTest extends BaseUnitTest {
 
 	@Test
 	public void tanX() {
-		GeoFunction tanX = add("tan(x)");
-		double xMin = -Math.PI / 4;
-		IntervalTuple range = PlotterUtils.newRange(xMin, (3 * Math.PI) / 4, 8, 8);
-		IntervalFunctionSampler sampler =
-				new IntervalFunctionSampler(tanX, range, 100);
-		IntervalTupleList result = sampler.result();
-		assertEquals(IntervalConstants.undefined(), result.get(74).y());
+		IntervalTupleList result = functionValues("tan(x)", -PI / 4, 3 * PI / 4, -10, 10);
+		assertTrue(result.get(74).isAsymptote());
+	}
+
+	@Test
+	public void tanXZoomedOut() {
+		IntervalTupleList result = functionValues("tan(x)", -PI / 4, 6 * PI / 4, -35, 20);
+		assertTrue(result.get(74).isAsymptote());
 	}
 
 	@Test
 	public void cotX() {
-		GeoFunction tanX = add("cot(x)");
-		IntervalTuple range = PlotterUtils.newRange(0, Math.PI, -9, 9);
-		IntervalFunctionSampler sampler =
-				new IntervalFunctionSampler(tanX, range, 100);
-		IntervalTupleList result = sampler.result();
+		IntervalTupleList result = functionValues("cot(x)", 0, PI, -9, 9);
 		assertTrue(result.get(0).y().isUndefined()
 				&& result.get(100).y().isUndefined());
 	}
 
 	@Test
 	public void secCscXInverseCutOff() {
-		GeoFunction function = add("1/sec(csc(x))");
-		IntervalTuple range = PlotterUtils.newRange(-2.9, 2.9, -8, 8);
-		IntervalFunctionSampler sampler =
-				new IntervalFunctionSampler(function, range, 100);
-		IntervalTupleList result = sampler.result();
+		IntervalTupleList result = functionValues("1/sec(csc(x))", -2.9, 2.9, -8, 8);
 		List<Integer> cutOffIndexes = Arrays.asList(7, 38, 61, 92);
 		for (int index: cutOffIndexes) {
 			assertFalse(result.get(index).y().isWhole());
@@ -83,8 +77,8 @@ public class IntervalAsymtotesTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void sinSecInverse() {
-		IntervalTupleList tuples = functionValues("sin(1/sec(x))", 0, 2, -1, 1);
+	public void tanSqrtCosX() {
+		IntervalTupleList tuples = functionValues("tan(sqrt(cos(x)))", -2, 2, 10, 10);
 		assertTrue(false);
 	}
 

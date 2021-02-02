@@ -1,5 +1,7 @@
 package org.geogebra.common.kernel.interval;
 
+import static org.geogebra.common.kernel.arithmetic.MyDouble.isFinite;
+
 import java.util.List;
 
 import org.geogebra.common.kernel.geos.GeoFunction;
@@ -13,6 +15,7 @@ import org.geogebra.common.kernel.geos.GeoFunction;
 public class IntervalFunctionSampler {
 
 	private final IntervalFunction function;
+	private GeoFunction geoFunction;
 	private final int numberOfSamples;
 	private final LinearSpace space;
 
@@ -25,6 +28,7 @@ public class IntervalFunctionSampler {
 	public IntervalFunctionSampler(GeoFunction geoFunction, IntervalTuple range,
 			int numberOfSamples) {
 		this.function = new IntervalFunction(geoFunction);
+		this.geoFunction = geoFunction;
 		this.numberOfSamples = numberOfSamples;
 		space = new LinearSpace();
 		update(range);
@@ -79,6 +83,14 @@ public class IntervalFunctionSampler {
 		IntervalAsymptotes asymtotes = new IntervalAsymptotes(samples, function);
 		asymtotes.process();
 		return samples;
+	}
+
+	private void checkAsymptote(IntervalTuple tuple) {
+		double yLow = geoFunction.evaluate(tuple.x().getLow(), 0);
+		double yHigh = geoFunction.evaluate(tuple.x().getHigh(), 0);
+		if (isFinite(yLow) || isFinite(yHigh)) {
+			tuple.markAsAsymptote();
+		}
 	}
 
 	/**

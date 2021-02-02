@@ -35,6 +35,10 @@ public class IntervalTest {
 		return new Interval(low, high);
 	}
 
+	static Interval interval(double singleton) {
+		return new Interval(singleton);
+	}
+
 	@Test
 	public void testSub() {
 		assertEquals(interval(-5, 5),

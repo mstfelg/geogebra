@@ -91,6 +91,38 @@ public class IntervalFunctionTest extends BaseUnitTest {
 	}
 
 	@Test
+	public void evaluateTanXAtZero() throws Exception {
+		GeoFunction geo = add("tan(x)");
+		IntervalFunction function = new IntervalFunction(geo);
+		Interval actual = function.evaluate(IntervalConstants.zero());
+		assertEquals(IntervalConstants.zero(), actual);
+	}
+
+	@Test
+	public void evaluateTanXAtMinusQuoterPi() throws Exception {
+		GeoFunction geo = add("tan(x)");
+		IntervalFunction function = new IntervalFunction(geo);
+		Interval actual = function.evaluate(interval(-PI / 4, -PI / 4));
+		assertEquals(interval(-1), actual);
+	}
+
+	@Test
+	public void evaluateTanXAtThreeTimesQuoterPi() throws Exception {
+		GeoFunction geo = add("tan(x)");
+		IntervalFunction function = new IntervalFunction(geo);
+		Interval actual = function.evaluate(interval(3 * PI / 4, 3 * PI / 4));
+		assertEquals(interval(-1), actual);
+	}
+
+	@Test
+	public void evaluateTanXAtIntervalMinus1To3QuotersofPi() throws Exception {
+		GeoFunction geo = add("tan(x)");
+		IntervalFunction function = new IntervalFunction(geo);
+		Interval actual = function.evaluate(interval(-PI / 4, 3 * PI / 4));
+		assertEquals(IntervalConstants.whole(), actual);
+	}
+
+	@Test
 	public void evaluateLnX() throws Exception {
 		GeoFunction geo = add("ln(x)");
 		IntervalFunction function = new IntervalFunction(geo);
