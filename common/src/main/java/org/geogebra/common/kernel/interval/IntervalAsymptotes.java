@@ -41,6 +41,7 @@ public class IntervalAsymptotes {
 	}
 
 	private void fixGraph(int index) {
+
 		Interval left = leftValue(index);
 		Interval right = rightValue(index);
 
