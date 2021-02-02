@@ -99,7 +99,7 @@ public class IntervalTuple {
 	 * @return if tuple is an empty one
 	 */
 	public boolean isEmpty() {
-		return x.isEmpty() && y.isEmpty();
+		return y.isEmpty();
 	}
 
 	public void setIndex(int index) {

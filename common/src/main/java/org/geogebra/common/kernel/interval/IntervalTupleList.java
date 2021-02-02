@@ -146,4 +146,7 @@ public class IntervalTupleList implements Iterable<IntervalTuple> {
 		list.clear();
 	}
 
+	public Interval valueAt(int index) {
+		return get(index).y();
+	}
 }

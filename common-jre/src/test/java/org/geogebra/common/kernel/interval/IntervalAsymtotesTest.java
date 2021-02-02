@@ -82,6 +82,15 @@ public class IntervalAsymtotesTest extends BaseUnitTest {
 		assertTrue(false);
 	}
 
+	@Test
+	public void squareRootOfSinX() {
+		IntervalTupleList tuples = functionValues("sqrt(sin(x))", 0, 3 * PI, -8, 8);
+		assertTrue(tuples.valueAt(33).hasZero());
+		assertTrue(tuples.valueAt(34).isEmpty());
+		assertTrue(tuples.valueAt(35).hasZero());
+		assertTrue(tuples.valueAt(68).hasZero());
+	}
+
 	private IntervalTupleList functionValues(String functionDescription,
 			double xmin, double xmax, double ymin, double ymax) {
 		GeoFunction function = add(functionDescription);
