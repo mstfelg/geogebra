@@ -170,7 +170,6 @@ class IntervalAlgebra {
 		}
 
 		if (interval.isWhole()) {
-			interval.set(0, Double.POSITIVE_INFINITY);
 			return interval;
 		}
 
