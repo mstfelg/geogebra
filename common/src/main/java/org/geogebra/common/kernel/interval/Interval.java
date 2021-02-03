@@ -730,7 +730,7 @@ public class Interval implements IntervalArithmetic, IntervalMiscOperands {
 	 *
 	 * @return true if any of the bounds is infinite but not both.
 	 */
-	public boolean isHalfInfinite() {
+	public boolean isSemiInfinite() {
 		return (isLowInfinite() && !isHighInfinite())
 				|| (!isLowInfinite() && isHighInfinite());
 	}

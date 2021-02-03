@@ -169,10 +169,6 @@ class IntervalAlgebra {
 			return interval;
 		}
 
-		if (interval.isWhole()) {
-			return interval;
-		}
-
 		double power = 1 / n;
 		if (interval.getHigh() < 0) {
 			if (DoubleUtil.isInteger(n) && ((int) n & 1) == 1) {

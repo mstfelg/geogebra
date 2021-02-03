@@ -32,7 +32,30 @@ public class IntervalAsymptotes {
 				checkAsymptote(index);
 			} else if (value.isUndefined()) {
 				fixGraph(index);
+			} else if (value(index).isSemiInfinite()) {
+				fixSemiInfinite(index);
 			}
+		}
+	}
+
+	private void fixSemiInfinite(int index) {
+		Interval value = value(index);
+		Interval left = leftValue(index);
+		if (left.isFinite()) {
+			completeSemiInfinite(value, left);
+		} else {
+			Interval right = rightValue(index);
+			if (right.isFinite()) {
+				completeSemiInfinite(value, right);
+			}
+		}
+	}
+
+	private void completeSemiInfinite(Interval value, Interval neighbour) {
+		if (value.isLowInfinite()) {
+			value.setHigh(neighbour.getLow());
+		} else {
+			value.setLow(neighbour.getHigh());
 		}
 	}
 
