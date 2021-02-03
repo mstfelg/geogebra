@@ -2,6 +2,7 @@ package org.geogebra.common.kernel.interval;
 
 import static java.lang.Math.PI;
 import static org.geogebra.common.kernel.interval.IntervalConstants.undefined;
+import static org.geogebra.common.kernel.interval.IntervalConstants.whole;
 import static org.geogebra.common.kernel.interval.IntervalFunction.isSupported;
 import static org.geogebra.common.kernel.interval.IntervalTest.interval;
 import static org.junit.Assert.assertEquals;
@@ -199,7 +200,7 @@ public class IntervalFunctionTest extends BaseUnitTest {
 		GeoFunction geo = add("tan(1/x)");
 		IntervalFunction function = new IntervalFunction(geo);
 		Interval actual = function.evaluate(interval(Double.NEGATIVE_INFINITY, 0));
-		assertEquals(undefined(), actual);
+		assertEquals(whole(), actual);
 	}
 
 	@Test
@@ -215,6 +216,6 @@ public class IntervalFunctionTest extends BaseUnitTest {
 		GeoFunction geo = add("cos(cot(x))");
 		IntervalFunction function = new IntervalFunction(geo);
 		Interval actual = function.evaluate(interval(1.57, 1.58));
-		assertEquals(interval(-1, 1), actual);
+		assertEquals(undefined(), actual);
 	}
 }

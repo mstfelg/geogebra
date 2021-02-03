@@ -22,12 +22,6 @@ public class IntervalAsymtotesTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void tanXZoomedOut() {
-		IntervalTupleList result = functionValues("tan(x)", -PI / 4, 6 * PI / 4, -35, 20);
-		assertTrue(result.get(74).isAsymptote());
-	}
-
-	@Test
 	public void cotX() {
 		IntervalTupleList result = functionValues("cot(x)", 0, PI, -9, 9);
 		assertTrue(result.get(0).y().isUndefined()
@@ -79,7 +73,12 @@ public class IntervalAsymtotesTest extends BaseUnitTest {
 	@Test
 	public void tanSqrtCosX() {
 		IntervalTupleList tuples = functionValues("tan(sqrt(cos(x)))", -2, 2, 10, 10);
-		assertTrue(false);
+		assertTrue(tuples.valueAt(0).isEmpty());
+		assertTrue(tuples.valueAt(1).hasZero());
+		assertEquals(new Interval(1.5560382788311629, 1.5574077246549032),
+				tuples.valueAt(41));
+		assertTrue(tuples.valueAt(80).hasZero());
+		assertTrue(tuples.valueAt(81).isEmpty());
 	}
 
 	@Test
@@ -89,6 +88,12 @@ public class IntervalAsymtotesTest extends BaseUnitTest {
 		assertTrue(tuples.valueAt(34).isEmpty());
 		assertTrue(tuples.valueAt(35).hasZero());
 		assertTrue(tuples.valueAt(68).hasZero());
+	}
+
+	@Test
+	public void squareRootOfTanX() {
+		IntervalTupleList tuples = functionValues("sqrt(tan(x))", 0, 3 * PI, -8, 8);
+		assertEquals(tuples.valueAt(54).getLow(), tuples.valueAt(53).getHigh(), 0);
 	}
 
 	private IntervalTupleList functionValues(String functionDescription,
