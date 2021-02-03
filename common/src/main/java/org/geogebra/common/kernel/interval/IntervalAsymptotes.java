@@ -10,16 +10,14 @@ import org.geogebra.common.kernel.arithmetic.MyDouble;
  */
 public class IntervalAsymptotes {
 	private final IntervalTupleList samples;
-	private IntervalFunction function;
 
 	/**
 	 * Constructor
-	 *  @param samples the evaluated data
+	 * @param samples the evaluated data
 	 *
 	 */
-	public IntervalAsymptotes(IntervalTupleList samples, IntervalFunction function) {
+	public IntervalAsymptotes(IntervalTupleList samples) {
 		this.samples = samples;
-		this.function = function;
 	}
 
 	/**

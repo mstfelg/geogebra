@@ -1,7 +1,5 @@
 package org.geogebra.common.kernel.interval;
 
-import static org.geogebra.common.kernel.arithmetic.MyDouble.isFinite;
-
 import java.util.List;
 
 import org.geogebra.common.kernel.geos.GeoFunction;
@@ -80,17 +78,9 @@ public class IntervalFunctionSampler {
 			addEmpty = !y.isEmpty();
 		}
 
-		IntervalAsymptotes asymtotes = new IntervalAsymptotes(samples, function);
+		IntervalAsymptotes asymtotes = new IntervalAsymptotes(samples);
 		asymtotes.process();
 		return samples;
-	}
-
-	private void checkAsymptote(IntervalTuple tuple) {
-		double yLow = geoFunction.evaluate(tuple.x().getLow(), 0);
-		double yHigh = geoFunction.evaluate(tuple.x().getHigh(), 0);
-		if (isFinite(yLow) || isFinite(yHigh)) {
-			tuple.markAsAsymptote();
-		}
 	}
 
 	/**
