@@ -13,7 +13,6 @@ import org.geogebra.common.kernel.geos.GeoFunction;
 public class IntervalFunctionSampler {
 
 	private final IntervalFunction function;
-	private GeoFunction geoFunction;
 	private final int numberOfSamples;
 	private final LinearSpace space;
 
@@ -26,7 +25,6 @@ public class IntervalFunctionSampler {
 	public IntervalFunctionSampler(GeoFunction geoFunction, IntervalTuple range,
 			int numberOfSamples) {
 		this.function = new IntervalFunction(geoFunction);
-		this.geoFunction = geoFunction;
 		this.numberOfSamples = numberOfSamples;
 		space = new LinearSpace();
 		update(range);

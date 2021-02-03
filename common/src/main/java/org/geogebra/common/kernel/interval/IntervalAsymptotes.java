@@ -24,7 +24,7 @@ public class IntervalAsymptotes {
 	 * Check samples for cut-off points and fix them.
 	 */
 	public void process() {
-		for (int index = 1; index < samples.count() -1; index++) {
+		for (int index = 1; index < samples.count() - 1; index++) {
 			Interval value = value(index);
 			if (value.isWhole()) {
 				checkAsymptote(index);
