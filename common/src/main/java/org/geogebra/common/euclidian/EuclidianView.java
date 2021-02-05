@@ -615,6 +615,7 @@ public abstract class EuclidianView implements EuclidianViewInterfaceCommon,
 	public EuclidianView() {
 		hitDetector = new HitDetector(this);
 		visibleRect = new Rectangle();
+		coordSystemInfo = new CoordSystemInfo(this);
 	}
 
 	/**
@@ -628,7 +629,6 @@ public abstract class EuclidianView implements EuclidianViewInterfaceCommon,
 	public EuclidianView(EuclidianController ec, int viewNo,
 		EuclidianSettings settings) {
 		this();
-		coordSystemInfo = new CoordSystemInfo(this);
 		init(ec, viewNo, settings);
 	}
 
